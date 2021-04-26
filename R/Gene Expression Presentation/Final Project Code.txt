@@ -1,0 +1,165 @@
+#loading in the Affy CEL files
+library(limma)
+library(affy)
+library(simpleaffy)
+library(fpc)
+library(affyPLM)
+library(annotate)
+> dir.path = 'E:\\'
+> fns <- sort(list.celfiles(path=dir.path,full.names=TRUE))
+> data.affy = ReadAffy(filenames = fns, phenoData = NULL)
+#AffyBatch object
+#size of arrays=1164x1164 features (25 kb)
+#cdf=HG-U133_Plus_2 (54675 affyids)
+#number of samples=20
+#number of genes=54675
+#annotation=hgu133plus2
+
+#Now need to convert data to data.frame
+> data = rma(data.affy)
+> dat = exprs(data)
+> dat = as.data.frame(dat)
+> dim(dat)
+[1] 54675    20
+
+##FINDING OUTLIERS##
+#Correlation Matrix
+	library(gplots)
+	layout(matrix(c(1,1,1,1,1,1,1,1,2,2), 5, 2, byrow = TRUE))
+	par(oma=c(5,7,1,1))
+	cx <- rev(colorpanel(25,"red","white","blue"))
+	leg <- seq(min(dat.cor,na.rm=T),max(dat.cor,na.rm=T),length=10)
+	image(dat.cor,main="Pearson's correlation matrix\nCDC15 experiment",axes=F,col=cx)
+	axis(1,at=seq(0,1,length=ncol(dat.cor)),label=dimnames(dat.cor)[[2]],cex.axis=0.9,las=2)
+	axis(2,at=seq(0,1,length=ncol(dat.cor)),label=dimnames(dat.cor)[[2]],cex.axis=0.9,las=2)
+	image(as.matrix(leg),col=cx,axes=F)
+	tmp <- round(leg,2)
+	axis(1,at=seq(0,1,length=length(leg)),labels=tmp,cex.axis=1)
+#The correlation matrix is too jumbled to make sense of any data visually, and won't be used in the presentation.
+
+#Hierarchical Dendrogram
+	dat.cor = cor(dat, use = 'pairwise.complete.obs')
+	dist = dist(dat.cor, method = "euclidian", diag = TRUE)
+	hc = hclust(dist)
+	plot(hc, main = "Cluster Dendrogram comparing Young and Old Dermis and Epidermis samples")
+#CV vs Mean Plot
+	dat.mean = apply(log2(dat),2,mean)
+	dat.sd = sqrt(apply(log2(dat),2,var))
+	dat.cv = dat.sd/dat.mean
+	plot(dat.mean,dat.cv,main="Aging Dermis vs. Epidermis samples\n Mean vs. the CV",xlab='Mean',ylab='CV')
+	points(dat.mean,dat.cv,bg="lightblue",col=1,pch=21)
+	text(dat.mean,dat.cv,label=dimnames(dat)[[2]],pos=1,cex=0.5)
+#Average Correlation Plot
+	dat.avg = apply(dat.cor,1,mean)
+	plot(c(1,length(dat.avg)),range(dat.avg),type="n",xlab="",ylab="Average Correlation",main="Aging Dermis vs Epidermis Average Correlation of Samples",axes=F)
+	points(dat.avg,bg="red",col=1,pch=21,cex=1.25)
+	axis(1,at=c(1:length(dat.avg)),labels=dimnames(dat)[[2]],las=2,cex.lab=0.4,cex.axis=0.6)
+	axis(2)
+	abline(v=seq(0.5,62.5,1),col="grey")
+# These three demonstrated that "E:\\GSM2857838_OD_4.CEL.gz" was an outlier compared to the rest of the dataset
+#"E:\\GSM2857838_OD_4.CEL.gz" will be removed before proceeding with the rest of the analysis. 
+> dat[,"E:\\GSM2857838_OD_4.CEL.gz"] = NULL
+> dim(dat)
+[1] 54675    19
+
+
+#See if any genes have data "low expression values"
+> dat.mean = rowMeans(dat)
+> dat.mean = as.data.frame(dat.mean)
+> dat.mean[dat.mean<1] 
+#numeric(0), meaning none of the genes have a mean value lower than one in the data set
+> max(dat)
+[1] 14.38946
+> min(dat)
+[1] 1.127204
+#therefore, i will not filter out any values.
+
+
+#finding differences between old and young samples using T-Test 
+> ann.dat = c('OD','OD','OD','OD','OE','OE','OE','OE','OE', 'YD','YD','YD','YD','YD','YE','YE','YE','YE','YE')
+> four.test.all.genes = function(x,s1,s2,s3,s4){
++ x1 = as.numeric(x[s1])
++ x2 = as.numeric(x[s2])
++ x3 = as.numeric(x[s3])
++ x4 = as.numeric(x[s4])
++ fac = c(rep("A",length(x1)),rep("B",length(x2)),rep("C",length(x3)),rep("D",length(x4)))
++ a.dat=data.frame(as.factor(fac),c(x1,x2,x3,x4))
++ names(a.dat) <- c('factor','express')
++ p.out = summary(aov(express~factor,a.dat))[[1]][1,5]
++ return(p.out)
++ }
+> aov.run = apply(dat,1,four.test.all.genes,s1=ann.dat=="OD",s2=ann.dat=="OE", s3=ann.dat=="YD", s4=ann.dat=="YE")
+stt = aov.run[aov.run<.005]
+stt = as.data.frame(stt)
+
+
+#histogram of the selected p-values
+> hist(aov.run, col="lightblue",xlab="P-Value", ylab = "# of Genes", main = "P-value distribution between \n Old and Young Dermis/Epidermis Samples", cex.main = 0.9)
+> abline(v=.005, col = 2, lwd =2)
+
+
+#Dimensionality reduction of the 3800 genes
+	#first subset dat object by the genes
+	> dat = dat[rownames(stt),]
+#PCA plot of the data, to look at the comparison between old and young 
+dat.pca = prcomp(t(dat))
+dat.loadings = dat.pca$x
+plot(range(dat.loadings[,1]),range(dat.loadings[,2]),type="n",xlab='PC1',ylab='PC2',main='
+PCA plot of Young vs Old tissue PC1 v PC2')
+points(dat.loadings[,1][ann.dat=='OD'],dat.loadings[,2][ann.dat=="OD"],col=1,bg='red',pch=21,cex=1.5)
+points(dat.loadings[,1][ann.dat=='OE'],dat.loadings[,2][ann.dat=="OE"],col=1,bg='blue',pch=21,cex=1.5)
+points(dat.loadings[,1][ann.dat=='YD'],dat.loadings[,2][ann.dat=="YD"],col=1,bg='green',pch=21,cex=1.5)
+points(dat.loadings[,1][ann.dat=='YE'],dat.loadings[,2][ann.dat=="YE"],col=1,bg='yellow',pch=21,cex=1.5)
+legend(x=-40,y=-15,legend=c('OD','OE','YD','YE'),col=c('red','blue','green','yellow'),pch=c(21,21,21,21))
+
+#Scree plot to analyze variability in the data
+dat.pca.var <- round(dat.pca$sdev^2 / sum(dat.pca$sdev^2)*100,2)
+plot(c(1:length(dat.pca.var)),dat.pca.var,type="b",xlab="# components",ylab="% variance",pch=21,col=1,bg=3,cex=1.5)
+title("Scree plot for % Variability in the \n Old vs Young Dataset")
+dat.pca.var[1:2]
+[1] 61.05 12.90
+
+
+#Classification: I want to use the Train and Test method done in lab 9
+#first to "train" the predictive model
+> library(MASS)
+> datx = as.data.frame(t(dat))
+> datx = data.frame(ann.dat, datx)
+> train = datx[c(1:2,5:6, 10:11, 15:16),]
+> test = datx[c(3:4,7:9,12:14,17:19),]
+> train[,1]
+[1] "OD" "OD" "OE" "OE" "YD" "YD" "YE" "YE"
+> n =  test[,1]
+ [1] "OD" "OD" "OE" "OE" "OE" "YD" "YD" "YD" "YE" "YE" "YE" "YE"
+> test[,1] = NULL
+> dat.lda = lda(ann.dat~.,train)
+> dat.pred = predict(dat.lda,test)
+	> table(dat.pred$class,n) #I wanted to see similar results as the lab and found that 
+				  #OE and YE seem to share similarities that were shown in the PCA
+   		 n
+    		    OD OE YD YE
+ 		OD  2  0  0  0
+  		OE  0  3  0  1
+  		YD  0  0  3  0
+  		YE  0  0  0  2
+
+> points = c(1,1,3,3,3,5,5,5,7,7,7)
+plot(dat.pred$x,pch= points, col=c('red','blue','black','green'), cex = 2, ylab="Discriminant functions",axes=F,xlab="Score",main="Discriminant functions for Old vs. Young \n Gene Expression Dataset \n (using all 3800 genes)")
+axis(2)
+grid()
+axis(1)
+legend(x=-3,y=-.4,title = "Actual Class",legend=c('Old-Dermis','Old-Epidermis','Young-Dermis', 'Young-Epidermis'), col = 'black', pch = c(1,3,5,7))
+legend(x=-3,y=-.2,title = "Predicted Class",legend=c('Old-Dermis','Old-Epidermis','Young-Dermis', 'Young-Epidermis'), col =  c('red','blue','black','green'), pch=19)
+
+#finding the discriminant genes to determine their function from the PCA analysis of the dataset
+> dat.sort = data.frame(sort(abs(dat.pca$rotation[,'PC1']),decreasing = TRUE)[1:10])
+#these genes were then researched using DAVID
+
+#END
+
+
+
+
+
+
+
