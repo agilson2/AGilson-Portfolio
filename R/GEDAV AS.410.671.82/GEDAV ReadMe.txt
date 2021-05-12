@@ -1,2 +1,2 @@
 These files include the homework assignments I completed for the Gene expression Data Analysis and Visualization course at JHU.
-The homework assignments for this course encompassed multiple weeks of R "labs" and notes. Each assignment used multiple different tools, packages, and lines of code in order to evaluate large datasets and draw analyses from them.   
+The homework assignments for this course encompassed multiple weeks of R "labs" and notes. Each assignment used multiple different tools, packages, and lines of code in order to evaluate large datasets and draw analyses from them.  
