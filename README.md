@@ -22,8 +22,28 @@ such as Next Generation DNA Sequencing Analysis and Genomic Expression Data Anal
 * The main focus of using Galaxy in the BTGA course was to facilitate the analysis of larger datasets.
 
 ### [Genome Browsers](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Genome%20Browsers)
-* A genome browser presents a unique visual and graphical display of information from a dataset that wouldn't otherwise be seen.
+* A genome browser presents a unique visual and graphical display of information from a dataset that wouldn't otherwise be seen. Examples of browsers used include
 * Integrative Genomics Viewer
 * NCBI Genome Browser
 * UCSC Genome Browser
 * Ensembl
+
+### [Glimmer and Other Command Line Tools](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Glimmer%20%26%20Command%20Line)
+* The BFX3 server available on the JHU network was essential in accessing many command line tools, such as glimmer.
+* Glimmer is a system of predicting gene loci in bacteria, archaea, and viruses. 
+* Other tools include
+  * BEDtools: allows data manipulation and analysis for information found in BED files
+  * SRAtoolkit: allows for the manipulation and analysis of raw sequencing reads presented by the sequencing read archive(SRA).
+
+### [Prediction Software](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Prediction%20Software)
+* Along with the other analysis tools, a large part of the work done in courses throughout my master's program involved the use of programs that predicted outcomes
+* Simple use of FASTA and BLAST was utilized throughout each course in the program
+* For the research paper on the SNP rs75932146, many protein structure, stability, and functional change programs were utilized. These included: COACH, DynaMut, mCSM, SIFT, SDM, and many more. Please see the PDF for more information on these programs.
+
+### [R](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/R)
+* R is an incredible tool for bioinformatic analysis. 
+* It was used in my own research/presentation of age related changes in gene expression between the dermis and epidermis.
+  * *During the course Gene Expression Data Analysis and Visualization*
+* It was also used to pull data from the Biomart genomic database hosted by Ensembl via the biomaRt package. 
+
+
