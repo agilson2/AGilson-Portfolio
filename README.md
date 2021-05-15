@@ -1,5 +1,5 @@
 # Tools for Bioinformatics
-A final portfolio for Bioinformatics: Tools for Genome Analysis (AS.410.635.81) in the JHU IGH program.
+A final portfolio for the "Bioinformatics: Tools for Genome Analysis (AS.410.635.81)" course from the JHU Individualized Genomics and Health program.
 This portfolio contains examples of experience with various bioinformatic tools, of lessons learned and discussions partaken in.
 Sections have been split in this repository relating to examples of different tools used during the BTGA course and others
 such as Next Generation DNA Sequencing Analysis and Genomic Expression Data Analysis and Visualization.
