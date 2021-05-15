@@ -6,8 +6,8 @@ such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data A
 *Each file on GitHub has a .txt file that describes each in detail.*
 
 ## [Coursework from Bioinformatics: Tools for Genome Analysis](https://github.com/agilson2/AGilson-Portfolio/tree/main/BTGA%20Classwork)
-* Both reading summaries and discussion posts from throughout the spring 2021 semester in Bioinformatics: Tools for Genome Analysis
-* Reading summaries were completed every week to synthesize the most important points from each week's lecture. 
+* Both reading summaries and discussion posts from  the spring 2021 semester in Bioinformatics: Tools for Genome Analysis
+* Reading summaries were completed every week to synthesize the most important issues from each week's lecture. 
   * These are broken up by individual units.
   * These units all contained information about tools that were later applied to the research paper and assingments.
 * Class Discussions were in relation to the unit's subject each week, but went beyond the base level of the lectures to spark interesting conversation.
