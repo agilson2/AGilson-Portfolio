@@ -5,15 +5,8 @@ Sections have been split in this repository relating to examples of different to
 such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data Analysis and Visualization".
 *Each file on GitHub has a .txt file that describes each in detail.*
 
-## [Coursework from Bioinformatics: Tools for Genome Analysis](https://github.com/agilson2/AGilson-Portfolio/tree/main/BTGA%20Classwork)
-* Both reading summaries and discussion posts from  the spring 2021 semester in Bioinformatics: Tools for Genome Analysis
-* Reading summaries were completed every week to synthesize the most important issues from each week's lecture. 
-  * These are broken up by individual units.
-  * These units all contained information about tools that were later applied to the research paper and assingments.
-* Class Discussions were in relation to the unit's subject each week, but went beyond the base level of the lectures to spark interesting conversation.
-
 ## [Galaxy and Other Bioinformatic Tools](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools) 
-* Contains multiple different examples from various tools.
+* Folder contains multiple different examples from various tools.
 * Most folders contain supplementary files that relate to the data presented in the file.
 
 ### [Galaxy](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Galaxy)
@@ -22,11 +15,10 @@ such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data A
 * The main focus of using Galaxy in the BTGA course was to facilitate the analysis of larger datasets.
 
 ### [Genome Browsers](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Genome%20Browsers)
-* A genome browser presents a unique visual and graphical display of information from a dataset that wouldn't otherwise be seen. Examples of browsers used include
-* Integrative Genomics Viewer
-* NCBI Genome Browser
-* UCSC Genome Browser
-* Ensembl
+* A genome browser presents a unique visual and graphical display of information from a dataset that would not otherwise be seen. Examples of browsers used include
+  * Integrative Genomics Viewer
+  * NCBI Genome Browser
+  * UCSC Genome Browser
 
 ### [Glimmer and Other Command Line Tools](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/Glimmer%20%26%20Command%20Line)
 * The BFX3 server available on the JHU network was essential in accessing many command line tools, such as glimmer.
@@ -41,9 +33,14 @@ such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data A
 * For the research paper on the SNP rs75932146, many protein structure, stability, and functional change programs were utilized. These included: COACH, DynaMut, mCSM, SIFT, SDM, and many more. Please see the PDF for more information on these programs.
 
 ### [R](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/R)
-* R is an incredible tool for bioinformatic analysis. 
+* R is a comprehnsive tool for bioinformatic and statistical analysis. 
 * It was used in my own research/presentation of age related changes in gene expression between the dermis and epidermis.
   * *During the course Gene Expression Data Analysis and Visualization*
 * It was also used to pull data from the Biomart genomic database hosted by Ensembl via the biomaRt package. 
 
-
+## [Coursework from Bioinformatics: Tools for Genome Analysis](https://github.com/agilson2/AGilson-Portfolio/tree/main/BTGA%20Classwork)
+* Both reading summaries and discussion posts from  the spring 2021 semester in Bioinformatics: Tools for Genome Analysis
+* Reading summaries were completed every week to synthesize the most important issues from each week's lecture. 
+  * These are broken up by individual units.
+  * These units all contained information about tools that were later applied to the research paper and assingments.
+* Class Discussions were in relation to the unit's subject each week, but went beyond the base level of the lectures to spark interesting conversation.
