@@ -35,7 +35,7 @@ such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data A
 ### [R](https://github.com/agilson2/AGilson-Portfolio/tree/main/Galaxy%20and%20Other%20Tools/R)
 * R is a comprehnsive tool for bioinformatic and statistical analysis. 
 * It was used in my own research/presentation of age related changes in gene expression between the dermis and epidermis.
-  * *During the course Gene Expression Data Analysis and Visualization*
+  * During the course "Gene Expression Data Analysis and Visualization"
 * It was also used to pull data from the Biomart genomic database hosted by Ensembl via the biomaRt package. 
 
 ## [Coursework from Bioinformatics: Tools for Genome Analysis](https://github.com/agilson2/AGilson-Portfolio/tree/main/BTGA%20Classwork)
