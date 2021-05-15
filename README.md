@@ -2,7 +2,7 @@
 A final portfolio for the "Bioinformatics: Tools for Genome Analysis (AS.410.635.81)" course from the JHU Individualized Genomics and Health program.
 This portfolio contains examples of experience with various bioinformatic tools, of lessons learned and discussions partaken in.
 Sections have been split in this repository relating to examples of different tools used during the BTGA course and others
-such as Next Generation DNA Sequencing Analysis and Genomic Expression Data Analysis and Visualization.
+such as "Next Generation DNA Sequencing Analysis" and "Genomic Expression Data Analysis and Visualization".
 *Each file on GitHub has a .txt file that describes each in detail.*
 
 ## [Coursework from Bioinformatics: Tools for Genome Analysis](https://github.com/agilson2/AGilson-Portfolio/tree/main/BTGA%20Classwork)
